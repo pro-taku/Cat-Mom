@@ -2,6 +2,46 @@ import org.w3c.dom.ranges.RangeException;
 
 import java.util.Scanner;
 
+/**
+ * <h1>{@link Display}</h1>
+ *
+ * <p>
+ *     수정 일자 : 2024.05.27 19:13<br>
+ *     수정자 : 국희근(protaku)
+ * </p>
+ *
+ * <br>
+ *
+ * <p>
+ *     이 게임은 터미널을 통해 실행되는 콘솔 게임이다.<br>
+ *     해당 클래스를 써서 사용자의 입력을 받거나, 정해진 메뉴를 보여줄 수 있다.
+ * </p>
+ *
+ * <br>
+ *
+ * <h2>Display 클래스의 메소드</h2>
+ *
+ * <h3>입력 관련</h3>
+ * <ol>
+ *     <li>{@return String} {@link #input()}: 사용자의 입력을 받는다.</li>
+ *     <li>{@return int} {@link  #input(int begin, int end)}: 사용자의 입력을 받는다. 범위를 지정할 수 있다.</li>
+ *     <li>{@return void} {@link #waitBeforeEnter()}: 사용자가 [Enter]를 누를 때까지 대기한다.</li>
+ * </ol>
+ *
+ * <h3>출력 관련</h3>
+ * <ol>
+ *     <li>{@link #systemOn()}: 게임 시작 시 메인 메뉴를 보여준다.</li>
+ *     <li>{@link #systemOff()}: 게임 종료 시 메시지를 보여준다.</li>
+ *     <li>{@link #explainGame()}: 게임 설명을 보여준다.</li>
+ *     <li>{@link #showContributors()}: 제작자 정보를 보여준다.</li>
+ *     <li>{@link #mainMenu()}: 게임 플레이어의 메인 메뉴를 보여준다.</li>
+ *     <li>{@link #showCatProfile(Cat[] cats)}: 고양이 정보를 보여준다.</li>
+ *     <li>{@link #actionMenu()}: 행동 메뉴를 보여준다.</li>
+ *     <li>{@link #event()}: 이벤트를 보여준다.</li>
+ *     <li>{@link #acting()}: 행동을 보여준다.</li>
+ *     <li>{@link #nextDay()}: 하루가 지났음을 알린다.</li>
+ * </ol>
+ */
 public abstract class Display {
     private static Scanner keyboard = new Scanner(System.in);
 
