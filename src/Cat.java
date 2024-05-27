@@ -7,4 +7,17 @@ public class Cat extends Display implements Action, Tick {
     private int clean;
     private int fatigue;
     private int intimacy;
+
+    public Cat(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void initiate() {
+
+    }
 }
