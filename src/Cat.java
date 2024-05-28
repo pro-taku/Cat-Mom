@@ -28,11 +28,11 @@ public class Cat extends Display implements Action, Tick {
     private String name;        // 이름
     private int nextAction;     // 다음 행동
 
-    private int satiety;        // 포만감
-    private int health;         // 건강
-    private int clean;          // 깨끗함
-    private int fatigue;        // 피로도
-    private int intimacy;       // 친밀도
+    private int satiety = 30;        // 포만감
+    private int health = 30;         // 건강
+    private int clean = 30;          // 깨끗함
+    private int fatigue = 30;        // 피로도
+    private int intimacy = 30;       // 친밀도
 
     // 생성자
     public Cat(String name) {
@@ -58,4 +58,46 @@ public class Cat extends Display implements Action, Tick {
     public void dispose() {
 
     }
+    // 밥주기
+    public void feed() {
+        satiety += 40;
+        fatigue += 20;
+        intimacy += 10;
+    }
+
+    // 재우기
+    public void sleep() {
+        fatigue = 0;
+        satiety -= 20;
+    }
+    // 쓰다듬기
+    public void pet() {
+        intimacy += 5;
+        fatigue += 10;
+    }
+
+    // 씻기
+    public void wash() {
+        fatigue += 20;
+        clean += 35;
+        intimacy -= 15;
+        satiety -= 20;
+    }
+
+
+    // 치료하기
+    public void cure() {
+        health += 45;
+        fatigue += 30;
+        intimacy -= 10;
+    }
+
+    // 산책시키기
+    public void stroll() {
+        intimacy += 15;
+        fatigue += 40;
+        satiety -= 30;
+        clean -= 30;
+    }
 }
+

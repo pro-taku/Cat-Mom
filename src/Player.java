@@ -61,8 +61,8 @@ public class Player extends Display implements Action {
                 continue;
             }
 
-            // 만약 행동을 선택했다면, 누구에게 대상으로 할지 선택
-            System.out.println("누구에게 대상으로 하시겠습니까? (번호로 입력해주세요)");
+            // 만약 행동을 선택했다면, 누구를 대상으로 할지 선택
+            System.out.println("누구를 대상으로 하시겠습니까? (번호로 입력해주세요)");
             showCatProfile(cats);
             option = input(1, catCount);
             result += option * 10;
