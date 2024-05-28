@@ -1,5 +1,11 @@
+package game.objects;
+
+import game.screen.Display;
+import game.script.Action;
+import game.Tick;
+
 /**
- * <h1>Cat</h1>
+ * <h1>game.objects.Cat</h1>
  *
  * <p>
  *     수정 일자 : 2024.05.27 19:13<br>
