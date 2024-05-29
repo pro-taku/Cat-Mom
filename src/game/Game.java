@@ -1,3 +1,10 @@
+package game;
+
+import game.objects.Cat;
+import game.objects.Player;
+import game.screen.Termianl;
+import game.script.Action;
+
 /**
  * <h1>{@link Game}</h1>
  *
@@ -23,7 +30,7 @@
  *     <li>{@link #playing()}: 게임을 진행합니다.</li>
  * </ol>
  */
-public class Game extends Display implements Action, Tick {
+public class Game extends Termianl implements Action, Tick {
     Player player;
     Cat[] cats;
     int warning;
@@ -64,7 +71,7 @@ public class Game extends Display implements Action, Tick {
 
     }
 
-    void playing() {
+    public void playing() {
         // 플레이어의 행동을 결정
         int action = player.doSomething(cats);
 

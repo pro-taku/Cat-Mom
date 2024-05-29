@@ -1,6 +1,7 @@
-import org.w3c.dom.ranges.RangeException;
+package game.screen;
 
-import java.util.Scanner;
+import game.objects.Cat;
+import game.screen.UserInput;
 
 /**
  * <h1>{@link Display}</h1>
@@ -19,15 +20,6 @@ import java.util.Scanner;
  *
  * <br>
  *
- * <h2>Display 클래스의 메소드</h2>
- *
- * <h3>입력 관련</h3>
- * <ol>
- *     <li>{@return String} {@link #input()}: 사용자의 입력을 받는다.</li>
- *     <li>{@return int} {@link  #input(int begin, int end)}: 사용자의 입력을 받는다. 범위를 지정할 수 있다.</li>
- *     <li>{@return void} {@link #waitBeforeEnter()}: 사용자가 [Enter]를 누를 때까지 대기한다.</li>
- * </ol>
- *
  * <h3>출력 관련</h3>
  * <ol>
  *     <li>{@link #systemOn()}: 게임 시작 시 메인 메뉴를 보여준다.</li>
@@ -42,47 +34,9 @@ import java.util.Scanner;
  *     <li>{@link #nextDay()}: 하루가 지났음을 알린다.</li>
  * </ol>
  */
-public abstract class Display {
-    private static Scanner keyboard = new Scanner(System.in);
+public class Display {
 
-    public static String input() {
-        System.out.printf("> ");
-        return keyboard.nextLine();
-    }
-
-    public static int input(int begin, int end) {
-        boolean hasError;
-        int result = 0;
-
-        do {
-            hasError = false;
-            System.out.printf("> ");
-            var userInput = keyboard.nextLine();
-
-            try {
-                result = Integer.parseInt(userInput);
-                if (result < begin || result > end) {
-                    throw new RangeException((short) 400, "범위를 벗어난 입력입니다.");
-                }
-            } catch (Exception e) {
-                System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
-                hasError = true;
-            }
-        } while (hasError);
-
-        return result;
-    }
-
-    static void waitBeforeEnter() {
-        System.out.printf("(뒤로 돌아가려면 [Enter]를 누르시오...)");
-        try {
-            keyboard.nextLine();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void systemOn() {
+    void systemOn() {
         System.out.println("     <고양이 키우기>     ");
         System.out.println("=======================\n");
         System.out.println("  1. 게임 시작");
@@ -93,18 +47,16 @@ public abstract class Display {
         System.out.println("=======================\n");
     }
 
-    public static void systemOff() {
+    void systemOff() {
         System.out.println("게임을 종료합니다.");
     }
 
-    public static void explainGame() {
+    void explainGame() {
         System.out.println("게임 설명 페이지");
-        waitBeforeEnter();
     }
 
-    public static void showContributors() {
+    void showContributors() {
         System.out.println("제작자 정보 페이지");
-        waitBeforeEnter();
     }
 
     void mainMenu() {

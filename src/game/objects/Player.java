@@ -1,5 +1,11 @@
+package game.objects;
+
+import game.screen.Display;
+import game.screen.Termianl;
+import game.script.Action;
+
 /**
- * <h1>Player</h1>
+ * <h1>game.objects.Player</h1>
  *
  * <p>
  *     수정 일자 : 2024.05.27 19:13<br>
@@ -21,7 +27,7 @@
  *     <li>{@retrun int} {@link #doSomething(Cat[] cats)} : 플레이어가 어떤 행동을 할지 결정하는 메서드</li>
  * </ol>
  */
-public class Player extends Display implements Action {
+public class Player extends Termianl implements Action {
     private String name;
     private int actionCount = 5;
 
@@ -29,7 +35,7 @@ public class Player extends Display implements Action {
         this.name = name;
     }
 
-    int doSomething(Cat[] cats) {
+    public int doSomething(Cat[] cats) {
         // 변수 선언
         boolean looping;            // 행동 선택 과정의 반복 여부
         int catCount = cats.length; // 고양이 수

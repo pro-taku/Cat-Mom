@@ -1,5 +1,7 @@
+package game.script;
+
 /**
- * <h1>(interface) Action</h1>
+ * <h1>(interface) game.script.Action</h1>
  *
  * <p>
  *     수정 일자 : 2024.05.27 19:13<br>
