@@ -1,21 +1,24 @@
 import game.Game;
-
-import game.Tick;
+import game.screen.Display;
 import game.screen.Termianl;
+
+import java.io.*;
 
 public class Main extends Termianl {
     public static void main(String[] args) {
-        Main main = new Main();
-        main.run();
+        new Main().run();
     }
 
     void run() {
+        Display.clearScreen();
         while (true) {
             // 맨 처음 시작할 때의 화면
+            option = 0;
+            optionCount = 4;
             systemOn();
-            int input = input(1, 4);
+            selectMenuItem();
 
-            switch (input) {
+            switch (option) {
                 // 게임 실행
                 case 1:
                     Game game = new Game();
@@ -56,15 +59,5 @@ public class Main extends Termianl {
 //                " ((____|    )_-\\ \\_-`\n" +
 //                " `-----'`-----` `--`\n");
 //
-//    }
-//    private static void setCursorPosition(int row, int col) {
-//        // ANSI escape code to set cursor position
-//        String escapeCode = "\u001B[" + (row + 1) + ";" + (col + 1) + "H";
-//        // Print the escape code to move the cursor
-//        System.out.print(escapeCode);
-//    }
-//    public static void clearScreen() {
-//        System.out.print("\033[H\033[2J");
-//        System.out.flush();
 //    }
 }

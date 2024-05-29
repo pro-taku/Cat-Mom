@@ -3,6 +3,9 @@ package game.screen;
 import game.objects.Cat;
 import game.screen.UserInput;
 
+import java.io.BufferedWriter;
+import java.io.OutputStreamWriter;
+
 /**
  * <h1>{@link Display}</h1>
  *
@@ -35,14 +38,19 @@ import game.screen.UserInput;
  * </ol>
  */
 public class Display {
+    final BufferedWriter writer;
+
+    public Display() {
+        writer = new BufferedWriter(new OutputStreamWriter(System.out));
+    }
 
     void systemOn() {
         System.out.println("     <고양이 키우기>     ");
         System.out.println("=======================\n");
-        System.out.println("  1. 게임 시작");
-        System.out.println("  2. 게임 설명");
-        System.out.println("  3. 제작자 정보");
-        System.out.println("  4. 게임 종료");
+        System.out.println("  1. 게임 시작           ");
+        System.out.println("  2. 게임 설명           ");
+        System.out.println("  3. 제작자 정보         ");
+        System.out.println("  4. 게임 종료           ");
         System.out.println("\n  (원하는 번호를 입력해주세요)\n");
         System.out.println("=======================\n");
     }
@@ -90,4 +98,16 @@ public class Display {
     void event() {}
     void acting() {}
     void nextDay() {}
+
+    void setCursorPosition(int row, int col) {
+        // ANSI escape code to set cursor position
+        String escapeCode = "\u001B[" + (row + 1) + ";" + (col + 1) + "H";
+        // Print the escape code to move the cursor
+        System.out.print(escapeCode);
+    }
+
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
 }
