@@ -4,6 +4,8 @@ import game.objects.Cat;
 import game.objects.Player;
 import game.screen.Termianl;
 import game.script.Action;
+import game.screen.TextColor;
+import org.w3c.dom.Text;
 
 /**
  * <h1>{@link Game}</h1>
@@ -30,6 +32,7 @@ import game.script.Action;
  *     <li>{@link #playing()}: 게임을 진행합니다.</li>
  * </ol>
  */
+
 public class Game extends Termianl implements Action, Tick {
     Player player;
     Cat[] cats;
@@ -39,7 +42,7 @@ public class Game extends Termianl implements Action, Tick {
     @Override
     public void initiate() {
         // 플레이어의 이름 입력
-        System.out.println("\n플레이어 이름");
+        System.out.println(TextColor.yellow+ "\n플레이어 이름");
         String name = input();
         player = new Player(name);
 
@@ -50,7 +53,7 @@ public class Game extends Termianl implements Action, Tick {
 
         // 고양이 이름 입력
         for (int i=1 ; i <= catCount; i++) {
-            System.out.println("\n" + i + "번째 고양이 이름");
+            System.out.println(TextColor.yellow+"\n" + i + "번째 고양이 이름"+TextColor.exit);
             cats[i] = new Cat(input());
         }
 
