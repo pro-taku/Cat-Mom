@@ -20,7 +20,7 @@ public class UserInput {
     private Scanner keyboard = new Scanner(System.in);
 
     String input() {
-        System.out.printf("> ");
+        System.out.printf(TextColor.yellow + "> " + TextColor.exit);
         return keyboard.nextLine();
     }
 
@@ -30,7 +30,7 @@ public class UserInput {
 
         do {
             hasError = false;
-            System.out.printf("> ");
+            System.out.printf(TextColor.yellow + "> " + TextColor.exit);
             var userInput = keyboard.nextLine();
 
             try {
@@ -39,7 +39,7 @@ public class UserInput {
                     throw new RangeException((short) 400, "범위를 벗어난 입력입니다.");
                 }
             } catch (Exception e) {
-                System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+                System.out.println(TextColor.red + "잘못된 입력입니다. 다시 입력해주세요." + TextColor.exit);
                 hasError = true;
             }
         } while (hasError);
@@ -48,12 +48,11 @@ public class UserInput {
     }
 
     void waitBeforeEnter() {
-        System.out.printf("(뒤로 돌아가려면 [Enter]를 누르시오...)");
+        System.out.printf(TextColor.yellow + "(뒤로 돌아가려면 [Enter]를 누르시오...)" + TextColor.exit);
         try {
             keyboard.nextLine();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }

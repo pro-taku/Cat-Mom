@@ -1,8 +1,6 @@
 package game.objects;
 
-import game.screen.Display;
-import game.script.Action;
-import game.Tick;
+import game.screen.Termianl;
 
 /**
  * <h1>game.objects.Cat</h1>
@@ -27,22 +25,66 @@ import game.Tick;
  *
  * <h2>주요 메소드</h2>
  * <ol>
- *     <li>{@link #initiate()}: 초기화</li>
  * </ol>
  */
-public class Cat extends Display implements Action, Tick {
+public class Cat extends Termianl {
+    //
+    //
+
+    public void update(int action) {
+        switch (action) {
+            case 1:
+                feed();
+                break;
+            case 2:
+                sleep();
+                break;
+            case 3:
+                pet();
+                break;
+            case 4:
+                wash();
+                break;
+            case 5:
+                cure();
+                break;
+            case 6:
+                stroll();
+                break;
+        }
+        catEvent(this, action);
+    }
+
     private String name;        // 이름
     private int nextAction;     // 다음 행동
 
-    private int satiety = 30;        // 포만감
-    private int health = 30;         // 건강
-    private int clean = 30;          // 깨끗함
-    private int fatigue = 30;        // 피로도
-    private int intimacy = 30;       // 친밀도
+    private int satiety;        // 1. 포만감
+    private int health;         // 2. 건강
+    private int clean;          // 3. 깨끗함
+    private int fatigue;        // 4. 피로도
+    private int intimacy;       // 5. 친밀도
 
     // 생성자
     public Cat(String name) {
         this.name = name;
+        satiety = 30;
+        health = 50;
+        clean = 30;
+        fatigue = 0;
+        intimacy = 30;
+    }
+
+    // setter
+    public void resetSatiety() {
+        this.satiety = 30;
+    }
+
+    public void resetClean() {
+        this.clean = 30;
+    }
+
+    public void resetFatigue() {
+        this.fatigue = 70;
     }
 
     // Getter
@@ -50,20 +92,26 @@ public class Cat extends Display implements Action, Tick {
         return name;
     }
 
-    @Override
-    public void initiate() {
-
+    public int getSatiety() {
+        return satiety;
     }
 
-    @Override
-    public void update() {
-
+    public int getHealth() {
+        return health;
     }
 
-    @Override
-    public void dispose() {
-
+    public int getClean() {
+        return clean;
     }
+
+    public int getFatigue() {
+        return fatigue;
+    }
+
+    public int getIntimacy() {
+        return intimacy;
+    }
+
     // 밥주기
     public void feed() {
         satiety += 40;
@@ -76,6 +124,7 @@ public class Cat extends Display implements Action, Tick {
         fatigue = 0;
         satiety -= 20;
     }
+
     // 쓰다듬기
     public void pet() {
         intimacy += 5;
@@ -90,7 +139,6 @@ public class Cat extends Display implements Action, Tick {
         satiety -= 20;
     }
 
-
     // 치료하기
     public void cure() {
         health += 45;
@@ -101,6 +149,7 @@ public class Cat extends Display implements Action, Tick {
     // 산책시키기
     public void stroll() {
         intimacy += 15;
+        health += 30;
         fatigue += 40;
         satiety -= 30;
         clean -= 30;

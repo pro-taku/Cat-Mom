@@ -1,8 +1,6 @@
 package game.objects;
 
-import game.screen.Display;
 import game.screen.Termianl;
-import game.script.Action;
 
 /**
  * <h1>game.objects.Player</h1>
@@ -27,12 +25,33 @@ import game.script.Action;
  *     <li>{@retrun int} {@link #doSomething(Cat[] cats)} : 플레이어가 어떤 행동을 할지 결정하는 메서드</li>
  * </ol>
  */
-public class Player extends Termianl implements Action {
-    private String name;
+public class Player extends Termianl {
+    private final String name;
     private int actionCount = 5;
+    private Cat[] cats;
 
     public Player(String name) {
         this.name = name;
+    }
+
+    public void setCats(Cat[] cats) {
+        this.cats =  cats;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getActionCount() {
+        return actionCount;
+    }
+
+    public void resetActionCount() {
+        actionCount = 5;
+    }
+
+    public Cat[] getCats() {
+        return cats;
     }
 
     public int doSomething(Cat[] cats) {
@@ -54,10 +73,15 @@ public class Player extends Termianl implements Action {
             if (option != 1)  {
                 looping = true;
                 if (option == 2) {
-                    System.out.println("고양이 정보");
+                    System.out.println("살펴볼 고양이 (번호로 입력해주세요)");
+                    showCatsName(cats);
+
+                    option = input(1, catCount);
+                    showCatInfo(cats[option]);
                     waitBeforeEnter();
-                } else if (option == 3) {
-                    System.out.println("플레이어 정보");
+                }
+                else if (option == 3) {
+                    showPlayerInfo(this);
                     waitBeforeEnter();
                 } else if (option == 4) {
                     System.out.println("메인창으로 돌아갑니다.");
@@ -69,7 +93,7 @@ public class Player extends Termianl implements Action {
 
             // 만약 행동을 선택했다면, 누구를 대상으로 할지 선택
             System.out.println("누구를 대상으로 하시겠습니까? (번호로 입력해주세요)");
-            showCatProfile(cats);
+            showCatsName(cats);
             option = input(1, catCount);
             result += option * 10;
 
@@ -83,8 +107,11 @@ public class Player extends Termianl implements Action {
             }
         } while(looping);
 
+        // 행동 횟수 감소
+        actionCount--;
+
         // 반환값의 10의 자리 = 고양이 번호
         // 반환값의  1의 자리 = 행동
-        return option;
+        return result;
     }
 }
