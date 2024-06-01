@@ -1,6 +1,7 @@
-package game.objects;
+package game.dto;
 
-import game.screen.Termianl;
+import game.terminal.Termianl;
+import game.terminal.display.Display;
 
 /**
  * <h1>game.objects.Player</h1>
@@ -58,7 +59,7 @@ public class Player extends Termianl {
         // 변수 선언
         boolean looping;            // 행동 선택 과정의 반복 여부
         int catCount = cats.length; // 고양이 수
-        int option, result = 0;     // 선택지, 반환값
+        int result = 0;     // 선택지, 반환값
 
         do {
             looping = false;
@@ -69,29 +70,39 @@ public class Player extends Termianl {
             // 3. 플레이어 정보 확인
             // 4. 메인창으로 돌아가기
             mainMenu();
-            option = input(1, 4);
-            if (option != 1)  {
+            startListening();
+            while (getNowListening()) {
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (option != 0)  {
                 looping = true;
-                if (option == 2) {
+                if (option == 1) {
+                    Display.cleanScreen();
                     System.out.println("살펴볼 고양이 (번호로 입력해주세요)");
                     showCatsName(cats);
 
                     option = input(1, catCount);
                     showCatInfo(cats[option]);
-                    waitBeforeEnter();
                 }
-                else if (option == 3) {
+                else if (option == 2) {
+                    Display.cleanScreen();
                     showPlayerInfo(this);
-                    waitBeforeEnter();
-                } else if (option == 4) {
+                } else if (option == 3) {
+                    Display.setCursorPosition(14, 0);
                     System.out.println("메인창으로 돌아갑니다.");
                     waitBeforeEnter();
-                    return 0;
+                    return -1;
                 }
-                continue;
+                return 0;
             }
 
             // 만약 행동을 선택했다면, 누구를 대상으로 할지 선택
+            Display.setCursorPosition(14, 0);
             System.out.println("누구를 대상으로 하시겠습니까? (번호로 입력해주세요)");
             showCatsName(cats);
             option = input(1, catCount);
@@ -99,9 +110,16 @@ public class Player extends Termianl {
 
             // 어떤 행동을 할지 선택
             actionMenu();
-            option = input(0, 6);
-            if (option == 0) {
-                looping = true;
+            startListening();
+            while (getNowListening()) {
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (option == 6) {
+                return 0;
             } else {
                 result += option;
             }
@@ -114,4 +132,13 @@ public class Player extends Termianl {
         // 반환값의  1의 자리 = 행동
         return result;
     }
+
+    @Override
+    public void previous() {}
+
+    @Override
+    public void next() {}
+
+    @Override
+    public void select() {}
 }

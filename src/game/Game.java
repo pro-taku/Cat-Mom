@@ -1,9 +1,10 @@
 package game;
 
-import game.objects.Cat;
-import game.objects.Player;
-import game.screen.Termianl;
-import game.screen.TextColor;
+import game.dto.Cat;
+import game.dto.Player;
+import game.terminal.Termianl;
+import game.terminal.display.Display;
+import game.terminal.display.TextColor;
 
 /**
  * <h1>{@link Game}</h1>
@@ -35,6 +36,8 @@ public class Game extends Termianl {
     int days;
 
     public void initiate() {
+        Display.cleanScreen();
+
         // 플레이어의 이름 입력
         System.out.println(TextColor.yellow+ "\n플레이어 이름");
         String name = input();
@@ -60,14 +63,21 @@ public class Game extends Termianl {
     }
 
     public void playing() {
-        showDays(days);
         while (true) {
+            Display.cleanScreen();
+            showDays(days);
+
             // 플레이어의 행동을 결정
             int action = player.doSomething(cats);
 
+            // 만약 플레이어가 정보 탐색을 시도했다면,
+            // 게임 메뉴 화면을 보여준다.
+            if (action == 0) {
+                continue;
+            }
             // 만약 플레이어가 종료를 선택했다면
             // 처음 화면으로 돌아간다.
-            if (action == 0) {
+            if (action < 0) {
                 return;
             }
 
@@ -145,9 +155,15 @@ public class Game extends Termianl {
 
     private void dayUpdate() {
         days++;
-
         player.resetActionCount();
-
-        showDays(days);
     }
+
+    @Override
+    public void previous() {}
+
+    @Override
+    public void next() {}
+
+    @Override
+    public void select() {}
 }

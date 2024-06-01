@@ -1,6 +1,6 @@
-package game.objects;
+package game.dto;
 
-import game.screen.Termianl;
+import game.terminal.Termianl;
 
 /**
  * <h1>game.objects.Cat</h1>
@@ -28,27 +28,25 @@ import game.screen.Termianl;
  * </ol>
  */
 public class Cat extends Termianl {
-    //
-    //
 
     public void update(int action) {
         switch (action) {
-            case 1:
+            case 0:
                 feed();
                 break;
-            case 2:
+            case 1:
                 sleep();
                 break;
-            case 3:
+            case 2:
                 pet();
                 break;
-            case 4:
+            case 3:
                 wash();
                 break;
-            case 5:
+            case 4:
                 cure();
                 break;
-            case 6:
+            case 5:
                 stroll();
                 break;
         }
@@ -154,5 +152,14 @@ public class Cat extends Termianl {
         satiety -= 30;
         clean -= 30;
     }
+
+    @Override
+    public void previous() {}
+
+    @Override
+    public void next() {}
+
+    @Override
+    public void select() {}
 }
 

@@ -1,7 +1,7 @@
-package game.screen;
+package game.terminal.display;
 
-import game.objects.Cat;
-import game.objects.Player;
+import game.dto.Cat;
+import game.dto.Player;
 
 /**
  * <h1>{@link Display}</h1>
@@ -33,7 +33,17 @@ import game.objects.Player;
  */
 public class Display {
 
-    void systemOn() {
+    public static void cleanScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
+    public static void setCursorPosition(int row, int col) {
+        System.out.print("\033[" + row + ";" + col + "H");
+        System.out.flush();
+    }
+
+    public void systemOn() {
         System.out.println(TextColor.yellow + "╔════════════════════════════════════════════════════════════════════════════════════╗" + TextColor.exit);
         System.out.println(TextColor.yellow + "║   ______      ___      .___________.     ______      ___      .______     _______  ║" + TextColor.exit);
         System.out.println(TextColor.yellow + "║  /      |    /   \\     |           |    /      |    /   \\     |   _  \\   |   ____| ║" + TextColor.exit);
@@ -64,23 +74,23 @@ public class Display {
         System.out.println("   ╚══════════════════════════════════════════════════════════════════════════════╝" );
     }
 
-    void systemOff() {
+    public void systemOff() {
         System.out.println("게임을 종료합니다.");
     }
 
-    void explainGame() {
+    public void explainGame() {
         System.out.println("게임 설명 페이지");
     }
 
-    void showContributors() {
+    public void showContributors() {
         System.out.println("제작자 정보 페이지");
     }
 
-    void showDay(int day) {
-        System.out.println("\n< " + day + " day >");
+    public void showDay(int day) {
+        System.out.println("\n   < " + day + " day >");
     }
 
-    void mainMenu() {
+    public void mainMenu() {
         System.out.println("\n   ╔═══════════════════════════════════════════════════════════════════════════════╗");
         System.out.println(  "   ║  "+TextColor.green+ "메인 메뉴"+TextColor.exit+"                                                                    ║" );
         System.out.println(  "   ║  1. 행동하기                                                                  ║");
@@ -90,14 +100,14 @@ public class Display {
         System.out.println(  "   ╚═══════════════════════════════════════════════════════════════════════════════╝\n");
     }
 
-    void showCatsName(Cat[] cats) {
+    public void showCatsName(Cat[] cats) {
         for (int i=1 ; i < cats.length ; i++) {
             System.out.printf("([" + i + "] " + cats[i].getName() + ")  ");
         }
         System.out.println();
     }
 
-    void showCatInfo(Cat cat) {
+    public void showCatInfo(Cat cat) {
         System.out.println("\n");
         System.out.println("   /\\_/\\              "+TextColor.yellow+"이름 : "+cat.getName()+TextColor.exit);
         System.out.println(" >(• ༝ •)<            "+TextColor.yellow+"친밀도 : "+cat.getIntimacy()+TextColor.exit);
@@ -110,32 +120,103 @@ public class Display {
         System.out.println("\n");
     }
 
-    void showPlayerInfo(Player player) {
-        System.out.println("\n=========================\n");
-        System.out.println(  "  이름 : " + player.getName());
-        System.out.println(  "  행동 횟수 : " + player.getActionCount());
-        System.out.print(    "  돌보는 고양이들  : "); showCatsName(player.getCats());
-        System.out.println("\n=========================\n");
+    public void showPlayerInfo(Player player) {
+        System.out.println("\n  ==================================================\n");
+        System.out.println(  "      이름 : " + player.getName());
+        System.out.println(  "      남은 행동 횟수 : " + player.getActionCount());
+        System.out.print(    "      돌보는 고양이들  : "); showCatsName(player.getCats());
+        System.out.println("\n  ==================================================\n");
     }
 
-    void actionMenu() {
+    public void actionMenu() {
 
-        System.out.println("\n   ╔══════════════════════════════════════════════════════════════════════════════╗" );
-        System.out.println(  "   ║  "+TextColor.green+ "행동"+TextColor.exit+"                                                                        ║" );
-        System.out.println(  "   ║  1. 밥 주기                                                                  ║" );
-        System.out.println(  "   ║  2. 재우기                                                                   ║" );
-        System.out.println(  "   ║  3. 쓰다듬기                                                                 ║");
-        System.out.println(  "   ║  4. 씻기                                                                     ║" );
-        System.out.println(  "   ║  5. 치료하기                                                                 ║");
-        System.out.println(  "   ║  6. 산책시키기                                                               ║");
-        System.out.println(  "   ║  0. 뒤로 가기                                                                ║");
-        System.out.println(  "   ╚══════════════════════════════════════════════════════════════════════════════╝\n" );
+        System.out.println("\n   ╔══════════════════════════════════════════════════════════════════════════════════════╗" );
+        System.out.println(  "   ║  "+TextColor.green+ "행동"+TextColor.exit+"                                                                                ║" );
+        System.out.println(  "   ║  1. 밥 주기                                                                          ║" );
+        System.out.println(  "   ║  2. 재우기                                                                           ║" );
+        System.out.println(  "   ║  3. 쓰다듬기                                                                         ║");
+        System.out.println(  "   ║  4. 씻기                                                                             ║" );
+        System.out.println(  "   ║  5. 치료하기                                                                         ║");
+        System.out.println(  "   ║  6. 산책시키기                                                                       ║");
+        System.out.println(  "   ║  7. 뒤로 가기                                                                        ║");
+        System.out.println(  "   ╚══════════════════════════════════════════════════════════════════════════════════════╝\n" );
     }
 
-    void catEvent(Cat cat, int action) {
+    public void explainAction(int action, int row, int col) {
+        final String[][] parags = {
+                {
+                    TextColor.yellow+"<밥 주기>"+TextColor.exit,
+                    "고양이에게 밥을 줍니다.",
+                    "생선을 좋아하니, 참치캔을 줍니다.",
+                    TextColor.yellow+"[효과]"+TextColor.exit,
+                    "포만감 " + TextColor.green+"+40"+TextColor.exit,
+                    "피로도 " + TextColor.red  +"+20"+TextColor.exit,
+                    "친밀도 " + TextColor.green+"+10"+TextColor.exit,
+                    ""
+                },
+                {
+                    TextColor.yellow+"<재우기>"+TextColor.exit,
+                    "낮잠을 재웁니다.",
+                    "사실 혼자 놀다 지쳐 잠들었습니다...",
+                    "피로도 " + TextColor.green + "-> 0" + TextColor.exit,
+                    "포만감 " + TextColor.red + "-20" + TextColor.exit,
+                    "", "", ""
+                },
+                {
+                    TextColor.yellow+"<쓰다듬기>"+TextColor.exit,
+                    "고양이를 쓰다듬어 줍니다.",
+                    "골골거리는 모습이 매우매우 귀엽습니다!",
+                    TextColor.yellow+"[효과]"+TextColor.exit,
+                    "친밀도 " + TextColor.green + "+5" + TextColor.exit,
+                    "피로도 " + TextColor.red + "+10" + TextColor.exit,
+                    "", ""
+                },
+                {
+                    TextColor.yellow+"<씻기>"+TextColor.exit,
+                    "고양이를 씻겨줍니다.",
+                    "한바탕 전쟁을 벌여야 겠군요...",
+                    TextColor.yellow+"[효과]"+TextColor.exit,
+                    "피로도 " + TextColor.red + "+20" + TextColor.exit + ", ",
+                    "청결도 " + TextColor.green + "+35" + TextColor.exit,
+                    "친밀도 " + TextColor.red + "-15" + TextColor.exit,
+                    "포만감 " + TextColor.red + "-20" + TextColor.exit
+                },
+                {
+                    TextColor.yellow+"<치료하기>"+TextColor.exit,
+                    "고양이의 몸상태가 조금 이상합니다!",
+                    "얼른 약을 먹이고, 쉬게 해주세요!",
+                    TextColor.yellow+"[효과]"+TextColor.exit,
+                    "건강 " + TextColor.green + "+45" + TextColor.exit,
+                    "피로도 " + TextColor.red + "+30" + TextColor.exit,
+                    "친밀도 " + TextColor.red + "-10" + TextColor.exit,
+                    ""
+                },
+                {
+                    TextColor.yellow+"<산책시키기>"+TextColor.exit,
+                    "근처 공원을 산책합니다.",
+                    TextColor.yellow+"[효과]"+TextColor.exit,
+                    "건강 " + TextColor.green + "+30" + TextColor.exit,
+                    "친밀도 " + TextColor.green + "+15" + TextColor.exit,
+                    "피로도 " + TextColor.red + "+40" + TextColor.exit,
+                    "만족도 " + TextColor.red + "-30" + TextColor.exit,
+                    "청결도 " + TextColor.red + "-30" + TextColor.exit
+                },
+                // 빈 값
+                {"", "", "", "", "", "", "", ""}
+        };
+
+        for (int i=0 ; i < parags[action].length ; i++) {
+            setCursorPosition(row+i, col);
+            System.out.print("                                                 ║");
+            setCursorPosition(row+i, col);
+            System.out.print(parags[action][i]);
+        }
+    }
+
+    public void catEvent(Cat cat, int action) {
         System.out.println("\n");
         switch (action) {
-            case 1:
+            case 0:
                 System.out.println(" 　 ∧ ∧　　　　　　");
                 System.out.println(" 　( ´･ω･)　배불러        " + cat.getName() + "(에)게 밥을 주었습니다");
                 System.out.println(" 　/　　⌒ヽ　　　         [효과]");
@@ -144,17 +225,17 @@ public class Display {
                         + "피로도 " + TextColor.red  +"+20"+TextColor.exit + ", "
                         + "친밀도 " + TextColor.green+"+10"+TextColor.exit);
                 break;
-            case 2:
+            case 1:
                 System.out.println("         . º   ");
                 System.out.println("     ∧_∧ .º    ");
                 System.out.println("　  ( ･ω･)  흐암        " + cat.getName() + "(을)를 재웠습니다.");
                 System.out.println("  　｜⊃／(＿＿＿         [효과]");
                 System.out.println("  ／└-(＿＿＿_／         "
-                        + "피로도 " + TextColor.red + "0" + TextColor.exit + ", "
+                        + "피로도 " + TextColor.green + "-> 0" + TextColor.exit + ", "
                         + "포만감 " + TextColor.red + "-20" + TextColor.exit);
                 System.out.println("  ￣￣￣￣￣￣   ");
                 break;
-            case 3:
+            case 2:
                 System.out.println("   　∧＿∧   (쓰담쓰담)");
                 System.out.println("  （´・ω・)つ＿ ∧              " + cat.getName() + "(을)를 쓰다듬어 주었습니다.");
                 System.out.println("  （つ　 / (・ω・｡)            [효과]");
@@ -162,7 +243,7 @@ public class Display {
                         + "친밀도 " + TextColor.green + "+5" + TextColor.exit + ", "
                         + "피로도 " + TextColor.red + "+10" + TextColor.exit);
                 break;
-            case 4:
+            case 3:
                 System.out.println("    ⋀,,⋀.       ");
                 System.out.println("  (*・ω・)/  뽀송!        " + cat.getName() + "(을)를 씻겼습니다.");
                 System.out.println("   (つ　 ﾉ               [효과]");
@@ -172,7 +253,7 @@ public class Display {
                         + "친밀도 " + TextColor.red + "-15" + TextColor.exit + ", "
                         + "포만감 " + TextColor.red + "-20" + TextColor.exit);
                 break;
-            case 5:
+            case 4:
                 System.out.println("    ∧＿∧                 ");
                 System.out.println("  （｡･ω･｡)つ━☆☆*다               " + cat.getName() + "(을)를 치료했습니다.");
                 System.out.println("  ⊂　　 ノ   　나았다옹　☆☆        [효과]");
@@ -181,7 +262,7 @@ public class Display {
                         + "피로도 " + TextColor.red + "+30" + TextColor.exit + ", "
                         + "친밀도 " + TextColor.red + "-10" + TextColor.exit);
                 break;
-            case 6:
+            case 5:
                 System.out.println(" 　　∧_∧             ");
                 System.out.println("　((・∀・∩　 산책 시간!");
                 System.out.println("　 ＼　　〈                    " + cat.getName() + "(을)를 산책시켰습니다.");
@@ -201,7 +282,7 @@ public class Display {
         System.out.println("\n");
     }
 
-    void warningCatStatus(Cat cat, int checkedValue) {
+    public void warningCatStatus(Cat cat, int checkedValue) {
         System.out.print("[!] " + cat.getName() + "이(가) ");
         switch (checkedValue) {
             case 1:
@@ -216,33 +297,33 @@ public class Display {
         }
     }
 
-    void warningMessage(int warning) {
+    public void warningMessage(int warning) {
         System.out.println("\n경고 횟수 : " + warning);
         System.out.println("[!] 3회 초과시 게임이 종료됩니다. 주의하세요!\n");
     }
 
-    void remainingActionChances(Player player) {
+    public void remainingActionChances(Player player) {
         System.out.println("\n(오늘 남은 행동 횟수 : " + player.getActionCount() + ")\n");
     }
 
-    void lose(int days) {
+    public void lose(int days) {
         System.out.println("""
-                ==============================
+                ============================================
                 
-                           게임 오버!
+                              게임 오버!
 
-                       고양이가 도망쳤습니다.
+                          고양이가 도망쳤습니다.
                 """);
         System.out.println(
-                "       (총 소요 시간 : " + days + " 일)");
+                "            (총 소요 시간 : " + days + " 일)");
         System.out.println("""
 
-                ==============================""");
+                ============================================""");
     }
 
-    void win(Player player, int days) {
+    public void win(Player player, int days) {
         System.out.println();
-        System.out.println(" 　 　 ∧＿∧     "+TextColor.red+ "고양이가 당신에게 하고 싶은 말이 있대요."+TextColor.exit);
+        System.out.println(" 　 　 ∧＿∧     "+TextColor.green+ "고양이가 당신에게 하고 싶은 말이 있대요."+TextColor.exit);
         System.out.println("　 　 (・ω・)    ");
         System.out.println("  ┏ーー∪ー∪ーー━┓");
         System.out.println("  ┃＼　　　　　／┃");

@@ -1,4 +1,4 @@
-package game.screen;
+package game.terminal.display;
 
 public class TextColor {
     public static final String red      = "\u001B[31m" ;

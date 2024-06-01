@@ -1,5 +1,6 @@
-package game.screen;
+package game.terminal.event;
 
+import game.terminal.display.TextColor;
 import org.w3c.dom.ranges.RangeException;
 
 import java.util.Scanner;
@@ -17,14 +18,14 @@ import java.util.Scanner;
  * </ol>
  */
 public class UserInput {
-    private Scanner keyboard = new Scanner(System.in);
+    private final Scanner keyboard = new Scanner(System.in);
 
-    String input() {
+    public String input() {
         System.out.printf(TextColor.yellow + "> " + TextColor.exit);
         return keyboard.nextLine();
     }
 
-    int input(int begin, int end) {
+    public int input(int begin, int end) {
         boolean hasError;
         int result = 0;
 
@@ -32,6 +33,7 @@ public class UserInput {
             hasError = false;
             System.out.printf(TextColor.yellow + "> " + TextColor.exit);
             var userInput = keyboard.nextLine();
+            userInput = userInput.trim();
 
             try {
                 result = Integer.parseInt(userInput);
@@ -47,8 +49,8 @@ public class UserInput {
         return result;
     }
 
-    void waitBeforeEnter() {
-        System.out.printf(TextColor.yellow + "(뒤로 돌아가려면 [Enter]를 누르시오...)" + TextColor.exit);
+    public void waitBeforeEnter() {
+        System.out.printf(TextColor.yellow + "(계속하시려면 [Enter]를 누르시오...)" + TextColor.exit);
         try {
             keyboard.nextLine();
         } catch (Exception e) {
