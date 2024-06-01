@@ -83,8 +83,8 @@ public abstract class Termianl {
         userInput.waitBeforeEnter();
     }
 
-    protected void win(int days) {
-        display.win(days);
+    protected void win(Player player, int days) {
+        display.win(player, days);
         userInput.waitBeforeEnter();
     }
 }

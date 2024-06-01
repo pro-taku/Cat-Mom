@@ -93,7 +93,7 @@ public class Game extends Termianl {
             // 게임 승리 조건 확인하기
             // └ 모든 고양이의 친밀도가 100이면 승리
             else if (checkWin()) {
-                win(days);
+                win(player, days);
                 return;
             }
 
@@ -105,6 +105,9 @@ public class Game extends Termianl {
             else {
                 dayUpdate();
             }
+
+            // Enter 누를 때까지 대기
+            waitBeforeEnter();
         }
     }
 
