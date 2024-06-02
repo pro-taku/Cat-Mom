@@ -69,8 +69,6 @@ public class Display {
         System.out.println("   ║  2. 게임 설명                                                                ║" );
         System.out.println("   ║  3. 제작자 정보                                                              ║" );
         System.out.println("   ║  4. 게임 종료                                                                ║");
-        System.out.println("   ║                                                                              ║" );
-        System.out.println("   ║  (원하는 번호를 입력해주세요)                                                ║");
         System.out.println("   ╚══════════════════════════════════════════════════════════════════════════════╝" );
     }
 

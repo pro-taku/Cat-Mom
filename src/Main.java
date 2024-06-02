@@ -2,8 +2,6 @@ import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
 import game.Game;
 
 import game.terminal.Termianl;
-import game.terminal.display.Display;
-import game.terminal.event.Controller;
 
 public class Main extends Termianl implements NativeKeyListener {
     public static void main(String[] args) {
